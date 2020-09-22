@@ -1,0 +1,12 @@
+import webbrowser
+
+with open('sites.txt') as f:
+        sites = str(f.read())
+
+print (f)
+print ('sites has: ',sites,' END')
+
+for site in sites:
+    #webbrowser.open(site)  # Go to google.com
+    siteLine = site
+    print ('Site: ',siteLine)
