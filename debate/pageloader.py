@@ -46,12 +46,25 @@ for site in sites:
         #text = soup.a
         #soup.body.b
 
-        m = re.findall(words, pagetext, re.IGNORECASE)
+        foundsite = 0
+        m = re.findall(words, pagetext, re.IGNORECASE)    #Check for string
         amount = len(m); #print (amount)
-        if m:
+        if m:                                             #if string found then...
             site = site.rstrip("\n")
+            print ('Found string')
             #sitesMatched = sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             sitesMatched.insert(0,site)   #Add site to sites matched list to open later
+            
+            for i in site: 
+                if i == sitesMatched: 
+                    print ("Element Exists")
+                    if foundsite == 0:
+                        print ('Site has not been added yet: ',site)
+                        sitesMatched.insert(0,site)   #Add site to sites matched list to open later
+                        foundsite += 1
+                    else:
+                        foundsite += 1
+            
             print ('             TOTAL: ',words,'=',amount,'\n')
         #time.sleep(0.001)
         #print ('text: ',text)
