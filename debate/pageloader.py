@@ -92,19 +92,18 @@ say('search complete')
 print ('HITS: ',len(sitesMatched)) #Display total matches
 
 
-print (len(sitesMatched))   #QA checking url list length
+#print (len(sitesMatched))   #QA checking url list length
 
 if len(sitesMatched) > 0:
+    say('Openning pages now')
     for page in sitesMatched:
-        say('Openning pages now')
         webbrowser.open(page)  #open browser
-        say('All pages opened')
         #print ('Site: ',siteLine)
 else:
     print ('Not found')
     sayStuff = "Oh my. I\'m so sorry. Nobody cares about "+words
     say(sayStuff)
 
-playsound('beep43.mp3')
+playsound('beep43.mp3'); say('All pages opened')
 say('I\'m done. I\'ll be here if you need me. Shutting down for now.')
 
