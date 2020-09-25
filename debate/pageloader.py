@@ -5,16 +5,13 @@
 #This will typically go back up to a month depending on how many videos are posted. Videos are only the ones that load initially until you scroll down
 
 import re
-import requests
 import time
+import os
+import sys
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import webbrowser
-
-import signal
-import sys
-import os
 
 from playsound import playsound
 from gtts import gTTS 
@@ -30,13 +27,10 @@ def say(text):
     playsound('text.mp3')
 
 
-#say('Welcome! What news are you looking for today?')
-
-#time.sleep(3)
-
 # Play the wav file
 playsound('beep41.mp3')
- 
+
+
 
 sitesMatched = []
 
@@ -92,23 +86,25 @@ for site in sites:
             
             print ('             TOTAL: ',words,'=',amount,'\n')
 
-        time.sleep(0.01)
+        #time.sleep(0.01)
 
-#os.system('spd-say "Search complete"'); time.sleep(1)
 say('search complete')
 print ('HITS: ',len(sitesMatched)) #Display total matches
 
 
-#os.system('spd-say "Openning pages now"')
-say('Openning pages now')
+print (len(sitesMatched))   #QA checking url list length
 
-if len(sitesMatched):
+if len(sitesMatched) > 0:
     for page in sitesMatched:
+        say('Openning pages now')
         webbrowser.open(page)  #open browser
+        say('All pages opened')
         #print ('Site: ',siteLine)
 else:
     print ('Not found')
+    sayStuff = "Oh my. I\'m so sorry. Nobody cares about "+words
+    say(sayStuff)
 
 playsound('beep43.mp3')
-say('All pages opened')
 say('I\'m done. I\'ll be here if you need me. Shutting down for now.')
+
