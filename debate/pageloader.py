@@ -14,14 +14,29 @@ import webbrowser
 
 import signal
 import sys
+import os
 
-def signal_handler(sig, frame):
-    print('You pressed Ctrl+C!')
-    sys.exit(0)
-    signal.signal(signal.SIGINT, signal_handler)
-    print('Press Ctrl+C')
-    signal.pause()
+from playsound import playsound
+from gtts import gTTS 
 
+def say(text):
+    '''
+    Say text
+    '''
+    message = text
+    language = 'en'
+    speech = gTTS(text = message, lang = language, slow = False)
+    speech.save('text.mp3')
+    playsound('text.mp3')
+
+
+#say('Welcome! What news are you looking for today?')
+
+#time.sleep(3)
+
+# Play the wav file
+playsound('beep41.mp3')
+ 
 
 sitesMatched = []
 
@@ -35,7 +50,9 @@ with open('sites.txt') as f:
 #text = ['160 million']
 
 #                          GET KEYWORDS FROM USER
-text = input('Enter keywords: \n').split(" ")
+say('Enter Keywords')
+text = input('Enter keywords: \n').split(",")
+say('Searching')
 print (text)
 
 #                          GO TO EACH SITE and parse HTML
@@ -50,18 +67,16 @@ for site in sites:
     for words in text:
 
         # get text
-        #text = soup.get_text()
-        #soup.find_all('a')
         pagetext = soup.text
-        #text = soup.a
-        #soup.body.b
 
         foundsite = 0
+        #say('Searching for string')
         m = re.findall(words, pagetext, re.IGNORECASE)    #Check for string
+        
         amount = len(m); #print (amount)
         if m:                                             #if string found then...
             site = site.rstrip("\n")
-            print ('Found string')
+            playsound('beep41.mp3')
             #sitesMatched = sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             
@@ -76,19 +91,24 @@ for site in sites:
                         foundsite += 1
             
             print ('             TOTAL: ',words,'=',amount,'\n')
-        #time.sleep(0.001)
-        #print ('text: ',text)
 
-        #print(text)
         time.sleep(0.01)
 
+#os.system('spd-say "Search complete"'); time.sleep(1)
+say('search complete')
 print ('HITS: ',len(sitesMatched)) #Display total matches
+
+
+#os.system('spd-say "Openning pages now"')
+say('Openning pages now')
 
 if len(sitesMatched):
     for page in sitesMatched:
-        webbrowser.open(page)  # Go to google.com
-        #siteLine = site
+        webbrowser.open(page)  #open browser
         #print ('Site: ',siteLine)
 else:
     print ('Not found')
 
+playsound('beep43.mp3')
+say('All pages opened')
+say('I\'m done. I\'ll be here if you need me. Shutting down for now.')
