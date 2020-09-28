@@ -46,6 +46,12 @@ with open('sites.txt') as f:
 #                          GET KEYWORDS FROM USER
 say('Enter Keywords')
 text = input('Enter keywords: \n').split(",")
+
+#saystuff = str(text)
+saystuff = str(text)
+say(saystuff)
+
+
 say('Searching')
 print (text)
 
@@ -70,7 +76,7 @@ for site in sites:
         amount = len(m); #print (amount)
         if m:                                             #if string found then...
             site = site.rstrip("\n")
-            playsound('beep41.mp3')
+            #playsound('beep41.mp3')
             #sitesMatched = sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             
@@ -86,9 +92,14 @@ for site in sites:
             
             print ('             TOTAL: ',words,'=',amount,'\n')
 
+        #else:
+            #playsound('qbeep.mp3')
         #time.sleep(0.01)
 
 say('search complete')
+sayStuff = "I found "+str(len(sitesMatched))+"hits"
+say(sayStuff)
+
 print ('HITS: ',len(sitesMatched)) #Display total matches
 
 
