@@ -55,14 +55,18 @@ say(saystuff)
 say('Searching')
 print (text)
 
+sitenum = 0                     #Used to track cache file numbers and/or site number
+#sitenem = str(sitenum)
 #                          GO TO EACH SITE and parse HTML
 for site in sites:
+    f = open("./tmp/page"+str(sitenum),"w+")
     url = site
     html = urlopen(url).read()
     html = html.decode('utf-8')
     soup = BeautifulSoup(html, features="html.parser")
+    f.write( str(soup)+'\n' )
     #soup = BeautifulSoup("<a aria-label>",'lxml')
-    
+     
     print(site)    
     for words in text:
 
@@ -81,7 +85,7 @@ for site in sites:
             sitesMatched.insert(0,site)   #Add site to sites matched list to open later
             
             for i in site: 
-                if i == sitesMatched: 
+                if i in sitesMatched: 
                     print ("Element Exists")
                     if foundsite == 0:
                         print ('Site has not been added yet: ',site)
@@ -89,12 +93,14 @@ for site in sites:
                         foundsite += 1
                     else:
                         foundsite += 1
+                        print ('not found')
             
             print ('             TOTAL: ',words,'=',amount,'\n')
 
         #else:
             #playsound('qbeep.mp3')
         #time.sleep(0.01)
+    sitenum += 1
 
 say('search complete')
 sayStuff = "I found "+str(len(sitesMatched))+"hits"
