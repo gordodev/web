@@ -26,6 +26,17 @@ def say(text):
     speech.save('text.mp3')
     playsound('text.mp3')
 
+def checkcache(string):
+    string = ["carlyle"]
+    #command = "grep -c "+str(text)[1:-1]+" ~/dev/github/web/debate/tmp/*" #Check cache for string
+    command = "echo \"Channels with keywords: `grep -ci "+str(text)[1:-1]+" ~/dev/github/web/debate/tmp/* | grep -v \":0\" | grep -c :`\"" #Check cache for string
+    #str(test_list)[1:-1]
+    print (command)
+    os.system(command)
+
+    #os.system('grep -l taxes ~/dev/github/web/debate/tmp/*')
+
+#checkcache(text)
 
 # Play the wav file
 playsound('beep41.mp3')
@@ -51,6 +62,7 @@ text = input('Enter keywords: \n').split(",")
 saystuff = str(text)
 say(saystuff)
 
+checkcache(text)
 
 say('Searching')
 print (text)
@@ -59,12 +71,12 @@ sitenum = 0                     #Used to track cache file numbers and/or site nu
 #sitenem = str(sitenum)
 #                          GO TO EACH SITE and parse HTML
 for site in sites:
-    f = open("./tmp/page"+str(sitenum),"w+")
+    f = open("./tmp/page"+str(sitenum),"w+")   #open/create cache file
     url = site
-    html = urlopen(url).read()
+    html = urlopen(url).read()                 #open url and insert into variable html
     html = html.decode('utf-8')
     soup = BeautifulSoup(html, features="html.parser")
-    f.write( str(soup)+'\n' )
+    f.write( str(soup)+'\n' )                  #Insert page into cache file
     #soup = BeautifulSoup("<a aria-label>",'lxml')
      
     print(site)    
