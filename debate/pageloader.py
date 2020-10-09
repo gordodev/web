@@ -128,11 +128,11 @@ if len(sitesMatched) > 0:
     for page in sitesMatched:
         webbrowser.open(page)  #open browser
         #print ('Site: ',siteLine)
+    playsound('beep43.mp3'); say('All pages opened')
 else:
     print ('Not found')
     sayStuff = "Oh my. I\'m so sorry. Nobody cares about "+words
     say(sayStuff)
 
-playsound('beep43.mp3'); say('All pages opened')
 say('I\'m done. I\'ll be here if you need me. Shutting down for now.')
 
