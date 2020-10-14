@@ -9,6 +9,7 @@ import time
 import os
 import sys
 
+import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import webbrowser
@@ -41,6 +42,32 @@ def checkcache(string):
 
     #os.system('grep -l taxes ~/dev/github/web/debate/tmp/*')
 
+def checkinternet():
+    url = "http://www.google.com"
+    timeout = 3
+
+    while True:
+        try:
+            request = requests.get(url, timeout=timeout)
+        
+        except:
+            print ('\n\n*** Unable to connect! ***\n\n')
+            time.sleep(2)
+        
+            print ('Attempting network reset. Stand by.\n\n')
+            time.sleep(2)
+            os.system('sudo service network-manager restart')
+
+            time.sleep(2)
+
+        else:
+            print ('\nNETWORK STATUS: OK\n')
+            break
+
+
+#Verify connectivity
+checkinternet()
+
 
 # Play the wav file
 playsound('beep41.mp3')
@@ -60,13 +87,13 @@ while True:
     say('Enter Keywords')
     text = input('Enter keywords: \n').split(",")
 
-    #saystuff = str(text)
     saystuff = str(text)
     say(saystuff)
 
     checkcache(text)
 
     say('Searching')
+    checkinternet()   
     print (text)
 
     sitenum = 0                     #Used to track cache file numbers and/or site number
