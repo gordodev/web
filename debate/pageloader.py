@@ -64,6 +64,15 @@ def checkinternet():
             print ('\nNETWORK STATUS: OK\n')
             break
 
+def google_news():
+    '''
+    Search the google news for keywords
+    '''
+    #Google search URL for 24 hours
+    #https://www.google.com/search?q=KEYWORD&rlz=1C1CHBF_enUS867US867&tbm=nws&sxsrf=ALeKk02kEvQM5Uqp8WziK8HDSbe5I1uEqQ:1602691985962&source=lnt&tbs=qdr:d&sa=X&ved=0ahUKEwjguIf0vLTsAhWhl3IEHdlzC6YQpwUIJQ&biw=1097&bih=558&dpr=1.75A
+
+    
+
 
 #Verify connectivity
 checkinternet()
@@ -124,7 +133,7 @@ while True:
                 #playsound('beep41.mp3')
                 #sitesMatched = sitesMatched.insert(0,site)   #Add site to sites matched list to open later
                 sitesMatched.insert(0,site)   #Add site to sites matched list to open later
-                print ('\nMatched pages so far: ',sitesMatched,'\n')#QA
+                #print ('\nMatched pages so far: ',sitesMatched,'\n')#QA
 
                 for i in site:
                     if i in sitesMatched:
@@ -158,6 +167,10 @@ while True:
         for page in sitesMatched:
             webbrowser.open(page)  #open browser
             #print ('Site: ',siteLine)
+    
+        #Search google news
+        webbrowser.open('https://www.google.com/search?q='+words+'&rlz=1C1CHBF_enUS867US867&tbm=nws&sxsrf=ALeKk02kEvQM5Uqp8WziK8HDSbe5I1uEqQ:1602691985962&source=lnt&tbs=qdr:d&sa=X&ved=0ahUKEwjguIf0vLTsAhWhl3IEHdlzC6YQpwUIJQ&biw=1097&bih=558&dpr=1.75A')
+
         playsound('beep43.mp3'); say('All pages opened')
         checkAgain = input('Do you want to search again?')
         if checkAgain == '':
